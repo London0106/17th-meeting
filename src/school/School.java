@@ -5,6 +5,13 @@
  */
 package school;
 
+import Model.Student;
+import Model.Subject;
+import Model.Teacher;
+import View.StaffView;
+import View.StudentView;
+import View.SubjectView;
+import View.TeacherView;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,63 +27,45 @@ public class School {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Scanner scan = new Scanner(System.in);
-        int i = 0, id = 1, id2;
-        List<subject> subject_variable = new ArrayList<>();
-        List<teacher> teacher_variable = new ArrayList<>();
-        List<students> student_variable = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        Subject subject = new Subject();
+        Teacher teacher = new Teacher();
+        Student student = new Student();
+        TeacherView teacherView = new TeacherView();
+        
+        StudentView studentView = new StudentView();
+        SubjectView subjectView = new SubjectView();
+        StaffView staffView = new StaffView();
+       int main, Mstudent, Mteacher, Msubject;
 
         do {
-            System.out.println("Teacher teacher teacher");
-            System.out.println("1.Add Teacher");
-            System.out.println("2.Show Teacher");
-            System.out.println("3.Add Student");
-            System.out.println("4.Show Student");
-            System.out.println("5.Add Subject");
-            System.out.println("6.Show Subject");
-            i = scan.nextInt();
-            switch (i) {
+            System.out.println("---main menu---");
+            System.out.println("[1] teacher's menu");
+            System.out.println("[2] student's menu");
+            System.out.println("[3] subject's menu");
+            System.out.println("[4] staff's menu");
+            System.out.println("[0] exit");
+            System.out.println("input menu :");
+            main = scanner.nextInt();
+            switch (main) {
                 case 1:
-                    teacher tempteacher = new teacher();
-                    teacher_variable.add(tempteacher.addteacher(scan, teacher_variable.size() + 1));
+                    teacherView.menu(scanner, subject);
                     break;
                 case 2:
-                    for (teacher tempteacher2 : teacher_variable) {
-                        tempteacher2.showteacher(tempteacher2);
-                        for (students s : tempteacher2.student_variable) {
-                            s.showstudent(s);
-                        }
-                    }
+                     studentView.menu(scanner,subject);
                     break;
                 case 3:
-                    System.out.println("*Add students for teachers id*");
-                    id = scan.nextInt();
-                    students tempstudent = new students();
-                    teacher_variable.get(id - 1).student_variable
-                            .add(tempstudent.addstudent(scan, teacher_variable.get(id - 1).student_variable.size() + 1));
+                    subjectView.menu(scanner, subject);
                     break;
-                case 4:
-                    for (students tempstudent2 : student_variable) {
-                        tempstudent2.showstudent(tempstudent2);
-                    }
+                case 4 :
+                    staffView.menu(scanner);
                     break;
-                case 5:
-                    System.out.println("*Add subject for students id*");
-                    id2 = scan.nextInt();
-                    subject tempsubject = new subject();
-                    student_variable = teacher_variable.get(id - 1).student_variable;
-                    student_variable
-                    .get(id2 - 1).subject_variable.add(tempsubject.addsubject(scan));
-
+                case 0:
                     break;
-                case 6:
-                    for (subject tempsubject2 : subject_variable) {
-                        tempsubject2.showsubject(tempsubject2);
-                    }
-                    break;
-
             }
-        } while (i != 0);
+
+        } while (main != 0);
+
     }
 
 }
